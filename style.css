@@ -1,0 +1,232 @@
+body {
+    background-color: #0b1426; /* Deep dark gaming blue */
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 380px;
+    background-color: #111a2e;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid #1e2d4a;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+h2 span {
+    color: #3b82f6;
+}
+
+.membership {
+    font-size: 11px;
+    color: #64748b;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.plan-badge {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #17233d;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #23355c;
+    margin-bottom: 15px;
+}
+
+.card h3, .vip-section h3 {
+    font-size: 15px;
+    margin-top: 0;
+    color: #94a3b8;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #0b1426;
+    border: 1px solid #23355c;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.cloudflare-box {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.checkmark {
+    color: #22c55e;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.cf-text {
+    color: #f97316;
+    margin-left: auto;
+}
+
+.expiry {
+    font-size: 14px;
+    color: #38bdf8;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.btn-save {
+    width: 100%;
+    background-color: #6d28d9;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(109, 40, 217, 0.4);
+}
+
+.downloads-bar {
+    background-color: #17233d;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #23355c;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #94a3b8;
+}
+
+/* VIP Section */
+.vip-section {
+    background-color: #17233d;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #23355c;
+}
+
+.vip-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-unlock {
+    background-color: #8b5cf6;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+/* 🔥 2x2 பக்கா பாக்ஸ் கிரிட் லேஅவுட் */
+.vip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* KIBO மாதிரி பெரிய பாக்ஸ் டிசைன் */
+.vip-card {
+    background-color: #111a2e;
+    border: 1px solid #23355c;
+    border-radius: 14px;
+    padding: 30px 10px; /* பாக்ஸ் ஹைட் அண்ட் வித் சமமா தெரிய மாஸ் பேடிங் */
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+/* லாக் ஸ்டேட் - மங்கலா இருக்கும் */
+.vip-card.locked {
+    opacity: 0.35;
+}
+
+/* அன்லாக் ஸ்டேட் - பிரகாசமா ஜொலிக்கும் */
+.vip-card.unlocked {
+    opacity: 1 !important;
+    border: 1px solid #8b5cf6 !important;
+    background-color: #1e1b4b;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+/* டாப்-ரைட் கார்னர் பூட்டு சிம்பல் அலைன்மென்ட் */
+.lock-icon {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 14px;
+    color: #eab308; /* தங்க நிற லாக் பூட்டு */
+}
+
+/* பாக்ஸ் நடுவுல இருக்குற பெரிய ஐகான் */
+.vip-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+/* ஐகானுக்கு கீழ இருக்குற டெக்ஸ்ட் */
+.vip-text {
+    font-size: 15px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.vip-card.unlocked .vip-text {
+    color: #ffffff;
+}
+
+.vip-warning {
+    color: #f59e0b;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+}

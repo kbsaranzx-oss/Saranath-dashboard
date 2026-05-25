@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saranath EFX Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <div class="header">
+            <h2>Welcome back, <br><span>Sᴀʀᴀɴᴀᴛʜ EFX 모</span></h2>
+            <p class="membership">MEMBERSHIP STATUS</p>
+            <div class="plan-badge" id="user-plan">Free Plan</div>
+        </div>
+
+        <div class="card">
+            <h3>🎮 UID Management</h3>
+            <label for="uid">Game UID</label>
+            <input type="text" id="uid" placeholder="Enter your UID here...">
+            
+            <div class="cloudflare-box">
+                <span class="checkmark">✓</span> Success! <span class="cf-text">Cloudflare</span>
+            </div>
+
+            <p class="expiry">⌛ Expires in: <span id="timer">01h 30m 00s</span></p>
+            
+            <button class="btn-save">💾 Save & Extend</button>
+        </div>
+
+        <div class="downloads-bar">
+            <span>📥 Downloads</span>
+            <span class="arrow">▼</span>
+        </div>
+
+        <div class="vip-section">
+            <div class="vip-header-flex">
+                <h3>⭐ VIP Access</h3>
+                <button class="btn-unlock" id="unlock-btn">⚡ UNLOCK VIP</button>
+            </div>
+            
+            <div class="vip-grid">
+                <div class="vip-card locked" id="card-profile">
+                    <span class="lock-icon">🔒</span>
+                    <div class="vip-icon">📇</div>
+                    <div class="vip-text">Profile</div>
+                </div>
+                <div class="vip-card locked" id="card-mails">
+                    <span class="lock-icon">🔒</span>
+                    <div class="vip-icon">✉️</div>
+                    <div class="vip-text">Mails</div>
+                </div>
+                <div class="vip-card locked" id="card-friends">
+                    <span class="lock-icon">🔒</span>
+                    <div class="vip-icon">👥</div>
+                    <div class="vip-text">Friends</div>
+                </div>
+                <div class="vip-card locked" id="card-duo">
+                    <span class="lock-icon">🔒</span>
+                    <div class="vip-icon">👨‍👦</div>
+                    <div class="vip-text">Duo</div>
+                </div>
+            </div>
+
+            <p class="vip-warning" id="vip-status-text">🔒 These features are locked for Free users.</p>
+        </div>
+    </div>
+
+    <script>
+        let totalSeconds = 90 * 60; 
+
+        const timerElement = document.getElementById('timer');
+        const saveButton = document.querySelector('.btn-save');
+        const uidInput = document.getElementById('uid');
+        
+        const unlockButton = document.getElementById('unlock-btn');
+        const vipCards = document.querySelectorAll('.vip-card');
+        const lockIcons = document.querySelectorAll('.lock-icon');
+        const vipWarningText = document.getElementById('vip-status-text');
+        const userPlanBadge = document.getElementById('user-plan');
+
+        // டைமர் லூப்
+        const countdown = setInterval(() => {
+            if (totalSeconds <= 0) {
+                clearInterval(countdown);
+                timerElement.innerText = "00h 00m 00s";
+                timerElement.style.color = "#ef4444"; 
+                return;
+            }
+            totalSeconds--;
+            let hours = Math.floor(totalSeconds / 3600);
+            let minutes = Math.floor((totalSeconds % 3600) / 60);
+            let seconds = totalSeconds % 60;
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            timerElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
+
+        // Save Button
+        saveButton.addEventListener('click', () => {
+            const userUID = uidInput.value.trim();
+            if (userUID === "") {
+                alert("🚨 தலா, ஃபர்ஸ்ட் உங்க UID-ஐ டைப் பண்ணுங்க!");
+                return;
+            }
+            localStorage.setItem('savedUID', userUID);
+            alert("🔥 Success! UID: " + userUID + " Has Been Saved & Extended!");
+            totalSeconds = 90 * 60;
+            timerElement.style.color = "#38bdf8"; 
+        });
+
+        // UNLOCK VIP Button Magic
+        unlockButton.addEventListener('click', () => {
+            alert("🎉 VIP Unlocked Successfully, Saranath thala! Enjoy VIP Features! 🔥");
+            userPlanBadge.innerText = "VIP Plan";
+            userPlanBadge.style.color = "#8b5cf6"; 
+
+            vipCards.forEach(card => {
+                card.classList.remove('locked');
+                card.classList.add('unlocked');
+            });
+
+            lockIcons.forEach(icon => {
+                icon.innerText = "🔓";
+                icon.style.color = "#22c55e";
+            });
+
+            vipWarningText.innerText = "✅ All VIP features are now fully active!";
+            vipWarningText.style.color = "#22c55e";
+            unlockButton.innerText = "👑 VIP ACTIVE";
+            unlockButton.style.background = "#22c55e";
+            unlockButton.disabled = true;
+        });
+    </script>
+</body>
+</html>
