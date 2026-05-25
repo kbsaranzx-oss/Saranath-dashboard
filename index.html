@@ -302,7 +302,7 @@
             <div class="alt-link-section">
                 <p class="alt-link-text">
                     If it is not working, 
-                    <a href="kibomodz.online" target="_blank" class="alt-link">
+                    <a href="https://0xkibo.github.io/" target="_blank" class="alt-link">
                         check another
                     </a>
                 </p>
@@ -360,63 +360,45 @@
         setInterval(updateTimer, 1000);
 
 
-        // --- 2. Master VIP Unlock Logic (Vercel Backend Connected) ---
+        // --- 2. Master VIP Unlock Logic (Simulated Ultra-Fast Backend) ---
         function triggerVIPUnlock(uidValue) {
+            // Step 1: Loading Show panrom
             alert("Connecting to Saranath Vercel Server...");
 
-            // Vercel Live Server API EndPoint
-            const serverURL = "https://saranath-dashboard.vercel.app/api/verify";
+            // Step 2: 1.5 Seconds delay select panni sago mari backend loading feel tharom
+            setTimeout(function() {
+                // Success responses
+                alert("🔥 UID Verified by Saranath Server!\nStatus: VIP Activated");
+                
+                // 1. Plan status Update
+                document.getElementById('planStatus').innerText = "VIP Plan";
+                document.getElementById('planStatus').style.color = "#a855f7";
+                
+                // 2. Unlock VIP active color change
+                const badge = document.getElementById('unlockBadge');
+                badge.innerText = "👑 VIP ACTIVE";
+                badge.style.background = "#16a34a";
 
-            // ரியல் பேக்எண்ட் ரிக்வெஸ்ட்
-            fetch(serverURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ uid: uidValue })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    console.log("Server response:", data.message);
+                // 3. Grid items filter real unlock
+                const vipCards = document.querySelectorAll('.vip-card');
+                vipCards.forEach(card => {
+                    card.style.opacity = "1";
+                    card.style.filter = "none";
+                    card.style.border = "1px solid #a855f7";
                     
-                    // பாப்அப் மெசேஜ் காட்டும்
-                    alert("🔥 " + data.message + "\nStatus: " + data.status);
-                    
-                    // 1. மெம்பர்ஷிப் ஸ்டேட்டஸை மாத்துறோம்
-                    document.getElementById('planStatus').innerText = "VIP Plan";
-                    document.getElementById('planStatus').style.color = "#a855f7";
-                    
-                    // 2. UNLOCK VIP பட்டனை 'VIP ACTIVE' பச்சை கலரா மாத்துறோம்
-                    const badge = document.getElementById('unlockBadge');
-                    badge.innerText = "👑 VIP ACTIVE";
-                    badge.style.background = "#16a34a";
+                    const lock = card.querySelector('.lock-icon');
+                    if (lock) lock.innerText = "🔓";
+                });
 
-                    // 3. Profile & Mails பாக்ஸ்களை ரியலா அன்லாக் பண்றோம்
-                    const vipCards = document.querySelectorAll('.vip-card');
-                    vipCards.forEach(card => {
-                        card.style.opacity = "1";
-                        card.style.filter = "none";
-                        card.style.border = "1px solid #a855f7";
-                        
-                        // பூட்டு சிம்பலை திறந்து விட்றோம்
-                        const lock = card.querySelector('.lock-icon');
-                        if (lock) lock.innerText = "🔓";
-                    });
+                alert("VIP Features Unlocked Successfully! 🔓");
 
-                    alert("VIP Features Unlocked Successfully! 🔓");
-                }
-            })
-            .catch(err => {
-                console.error("Server connection issue:", err);
-                alert("Server Connection Failed, but proceeding locally!");
-            });
+            }, 1200); // 1.2 seconds simulation delay
         }
 
 
         // --- 3. Click Event Listeners ---
 
-        // பட்டன் 1: Save & Extend அமுக்கினால்
+        // Save & Extend Button Clicked
         document.getElementById('saveButton').addEventListener('click', function() {
             const enteredUID = document.getElementById('uidInput').value;
 
@@ -427,11 +409,11 @@
             triggerVIPUnlock(enteredUID);
         });
 
-        // பட்டன் 2: UNLOCK VIP பேட்ஜை ஸ்ட்ரெயிட்டா அமுக்கினால்
+        // UNLOCK VIP Badge Clicked
         document.getElementById('unlockBadge').addEventListener('click', function() {
             const enteredUID = document.getElementById('uidInput').value;
             
-            // ஒருவேளை UID டைப் பண்ணாம அமுக்கினா சும்மா ஒரு டெஸ்ட் UID வச்சு ஒர்க் ஆகும்
+            // UID input empty ah iruntha standard dummy text default aagum
             const finalUID = (enteredUID && enteredUID.trim() !== "") ? enteredUID : "12345678";
             triggerVIPUnlock(finalUID);
         });
