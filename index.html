@@ -3,135 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saranath EFX Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Saranath EFX 모 - Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            background-color: #131a26;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid #1e293b;
+        }
+
+        .header-section {
+            margin-bottom: 24px;
+        }
+
+        .welcome-text {
+            color: #8892b0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-name {
+            color: #3b82f6;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .membership-status {
+            margin-top: 16px;
+        }
+
+        .status-label {
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .status-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .card-panel {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-field {
+            width: 100%;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #3b82f6;
+        }
+
+        .status-bar {
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .status-success {
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-brand {
+            color: #ea580c;
+        }
+
+        .timer-row {
+            color: #38bdf8;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: #6d28d9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(109, 40, 217, 0.4);
+        }
+
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .dropdown-panel {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+        }
+
+        .dropdown-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .vip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .vip-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        .unlock-badge {
+            background: linear-gradient(90deg, #a855f7, #6366f1);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.3s ease;
+        }
+
+        .unlock-badge:active {
+            transform: scale(0.95);
+        }
+
+        .vip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .vip-card {
+            background-color: #0f172a;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #1e293b;
+            opacity: 0.4;
+            filter: blur(0.5px);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .lock-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: #eab308;
+            font-size: 12px;
+        }
+
+        .vip-card-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .vip-card-name {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .alt-link-section {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .alt-link-text {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .alt-link {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px dashed #ef4444;
+            padding-bottom: 1px;
+            margin-left: 2px;
+        }
+    </style>
 </head>
 <body>
 
     <div class="dashboard-container">
-        <div class="header">
-            <h2>Welcome back, <br><span>Sᴀʀᴀɴᴀᴛʜ EFX 모</span></h2>
-            <p class="membership">MEMBERSHIP STATUS</p>
-            <div class="plan-badge" id="user-plan">Free Plan</div>
-        </div>
-
-        <div class="card">
-            <h3>🎮 UID Management</h3>
-            <label for="uid">Game UID</label>
-            <input type="text" id="uid" placeholder="Enter your UID here...">
-            
-            <div class="cloudflare-box">
-                <span class="checkmark">✓</span> Success! <span class="cf-text">Cloudflare</span>
+        <div class="header-section">
+            <div class="welcome-text">Welcome back,</div>
+            <div class="profile-name">SARANATH EFX 모</div>
+            <div class="membership-status">
+                <div class="status-label">Membership Status</div>
+                <div id="planStatus" class="status-value">Free Plan</div>
             </div>
-
-            <p class="expiry">⌛ Expires in: <span id="timer">01h 30m 00s</span></p>
-            
-            <button class="btn-save">💾 Save & Extend</button>
         </div>
 
-        <div class="downloads-bar">
-            <span>📥 Downloads</span>
-            <span class="arrow">▼</span>
-        </div>
-
-        <div class="vip-section">
-            <div class="vip-header-flex">
-                <h3>⭐ VIP Access</h3>
-                <button class="btn-unlock" id="unlock-btn">⚡ UNLOCK VIP</button>
+        <div class="card-panel">
+            <div class="panel-title">🎮 UID Management</div>
+            <div class="input-group">
+                <input type="text" id="uidInput" class="input-field" placeholder="Enter your UID here...">
             </div>
             
+            <div class="status-bar">
+                <span class="status-success">✓ Success!</span>
+                <span class="status-brand">Cloudflare</span>
+            </div>
+
+            <div class="timer-row">
+                ⏳ <span id="countdownTimer">Expires in: 01h 29m 53s</span>
+            </div>
+
+            <button id="saveButton" class="action-btn">
+                💾 Save & Extend
+            </button>
+            
+            <div class="alt-link-section">
+                <p class="alt-link-text">
+                    If it is not working, 
+                    <a href="kibomodz.online" target="_blank" class="alt-link">
+                        check another
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="dropdown-panel">
+            <span class="dropdown-title">📥 Downloads</span>
+            <span>▼</span>
+        </div>
+
+        <div class="card-panel">
+            <div class="vip-header">
+                <div class="vip-title">⭐ VIP Access</div>
+                <div id="unlockBadge" class="unlock-badge">⚡ UNLOCK VIP</div>
+            </div>
+
             <div class="vip-grid">
-                <div class="vip-card locked" id="card-profile">
+                <div id="profileBox" class="vip-card">
                     <span class="lock-icon">🔒</span>
-                    <div class="vip-icon">📇</div>
-                    <div class="vip-text">Profile</div>
+                    <span class="vip-card-icon">🪪</span>
+                    <span class="vip-card-name">Profile</span>
                 </div>
-                <div class="vip-card locked" id="card-mails">
+                <div id="mailsBox" class="vip-card">
                     <span class="lock-icon">🔒</span>
-                    <div class="vip-icon">✉️</div>
-                    <div class="vip-text">Mails</div>
-                </div>
-                <div class="vip-card locked" id="card-friends">
-                    <span class="lock-icon">🔒</span>
-                    <div class="vip-icon">👥</div>
-                    <div class="vip-text">Friends</div>
-                </div>
-                <div class="vip-card locked" id="card-duo">
-                    <span class="lock-icon">🔒</span>
-                    <div class="vip-icon">👨‍👦</div>
-                    <div class="vip-text">Duo</div>
+                    <span class="vip-card-icon">✉️</span>
+                    <span class="vip-card-name">Mails</span>
                 </div>
             </div>
-
-            <p class="vip-warning" id="vip-status-text">🔒 These features are locked for Free users.</p>
         </div>
     </div>
 
     <script>
-        let totalSeconds = 90 * 60; 
+        // --- 1. Real Countdown Timer Logic ---
+        let totalSeconds = 1 * 3600 + 29 * 60 + 53; // 01h 29m 53s
+        const timerElement = document.getElementById('countdownTimer');
 
-        const timerElement = document.getElementById('timer');
-        const saveButton = document.querySelector('.btn-save');
-        const uidInput = document.getElementById('uid');
-        
-        const unlockButton = document.getElementById('unlock-btn');
-        const vipCards = document.querySelectorAll('.vip-card');
-        const lockIcons = document.querySelectorAll('.lock-icon');
-        const vipWarningText = document.getElementById('vip-status-text');
-        const userPlanBadge = document.getElementById('user-plan');
-
-        // டைமர் லூப்
-        const countdown = setInterval(() => {
+        function updateTimer() {
             if (totalSeconds <= 0) {
-                clearInterval(countdown);
-                timerElement.innerText = "00h 00m 00s";
-                timerElement.style.color = "#ef4444"; 
+                timerElement.innerText = "Expires in: 00h 00m 00s";
                 return;
             }
             totalSeconds--;
+            
             let hours = Math.floor(totalSeconds / 3600);
             let minutes = Math.floor((totalSeconds % 3600) / 60);
             let seconds = totalSeconds % 60;
-            hours = hours < 10 ? '0' + hours : hours;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            timerElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
-        }, 1000);
 
-        // Save Button
-        saveButton.addEventListener('click', () => {
-            const userUID = uidInput.value.trim();
-            if (userUID === "") {
-                alert("🚨 தலா, ஃபர்ஸ்ட் உங்க UID-ஐ டைப் பண்ணுங்க!");
+            let hDisplay = hours < 10 ? "0" + hours : hours;
+            let mDisplay = minutes < 10 ? "0" + minutes : minutes;
+            let sDisplay = seconds < 10 ? "0" + seconds : seconds;
+
+            timerElement.innerText = `Expires in: ${hDisplay}h ${mDisplay}m ${sDisplay}s`;
+        }
+        setInterval(updateTimer, 1000);
+
+
+        // --- 2. Master VIP Unlock Logic (Vercel Backend Connected) ---
+        function triggerVIPUnlock(uidValue) {
+            alert("Connecting to Saranath Vercel Server...");
+
+            // Vercel Live Server API EndPoint
+            const serverURL = "https://saranath-dashboard.vercel.app/api/verify";
+
+            // ரியல் பேக்எண்ட் ரிக்வெஸ்ட்
+            fetch(serverURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ uid: uidValue })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Server response:", data.message);
+                    
+                    // பாப்அப் மெசேஜ் காட்டும்
+                    alert("🔥 " + data.message + "\nStatus: " + data.status);
+                    
+                    // 1. மெம்பர்ஷிப் ஸ்டேட்டஸை மாத்துறோம்
+                    document.getElementById('planStatus').innerText = "VIP Plan";
+                    document.getElementById('planStatus').style.color = "#a855f7";
+                    
+                    // 2. UNLOCK VIP பட்டனை 'VIP ACTIVE' பச்சை கலரா மாத்துறோம்
+                    const badge = document.getElementById('unlockBadge');
+                    badge.innerText = "👑 VIP ACTIVE";
+                    badge.style.background = "#16a34a";
+
+                    // 3. Profile & Mails பாக்ஸ்களை ரியலா அன்லாக் பண்றோம்
+                    const vipCards = document.querySelectorAll('.vip-card');
+                    vipCards.forEach(card => {
+                        card.style.opacity = "1";
+                        card.style.filter = "none";
+                        card.style.border = "1px solid #a855f7";
+                        
+                        // பூட்டு சிம்பலை திறந்து விட்றோம்
+                        const lock = card.querySelector('.lock-icon');
+                        if (lock) lock.innerText = "🔓";
+                    });
+
+                    alert("VIP Features Unlocked Successfully! 🔓");
+                }
+            })
+            .catch(err => {
+                console.error("Server connection issue:", err);
+                alert("Server Connection Failed, but proceeding locally!");
+            });
+        }
+
+
+        // --- 3. Click Event Listeners ---
+
+        // பட்டன் 1: Save & Extend அமுக்கினால்
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const enteredUID = document.getElementById('uidInput').value;
+
+            if (!enteredUID || enteredUID.trim() === "") {
+                alert("UID empty thala! First UID type பண்ணுங்க!");
                 return;
             }
-            localStorage.setItem('savedUID', userUID);
-            alert("🔥 Success! UID: " + userUID + " Has Been Saved & Extended!");
-            totalSeconds = 90 * 60;
-            timerElement.style.color = "#38bdf8"; 
+            triggerVIPUnlock(enteredUID);
         });
 
-        // UNLOCK VIP Button Magic
-        unlockButton.addEventListener('click', () => {
-            alert("🎉 VIP Unlocked Successfully, Saranath thala! Enjoy VIP Features! 🔥");
-            userPlanBadge.innerText = "VIP Plan";
-            userPlanBadge.style.color = "#8b5cf6"; 
-
-            vipCards.forEach(card => {
-                card.classList.remove('locked');
-                card.classList.add('unlocked');
-            });
-
-            lockIcons.forEach(icon => {
-                icon.innerText = "🔓";
-                icon.style.color = "#22c55e";
-            });
-
-            vipWarningText.innerText = "✅ All VIP features are now fully active!";
-            vipWarningText.style.color = "#22c55e";
-            unlockButton.innerText = "👑 VIP ACTIVE";
-            unlockButton.style.background = "#22c55e";
-            unlockButton.disabled = true;
+        // பட்டன் 2: UNLOCK VIP பேட்ஜை ஸ்ட்ரெயிட்டா அமுக்கினால்
+        document.getElementById('unlockBadge').addEventListener('click', function() {
+            const enteredUID = document.getElementById('uidInput').value;
+            
+            // ஒருவேளை UID டைப் பண்ணாம அமுக்கினா சும்மா ஒரு டெஸ்ட் UID வச்சு ஒர்க் ஆகும்
+            const finalUID = (enteredUID && enteredUID.trim() !== "") ? enteredUID : "12345678";
+            triggerVIPUnlock(finalUID);
         });
     </script>
 </body>
