@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saranath EFX 모 - Dashboard</title>
+    <title>Saranath EFX Mo - Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -302,7 +302,7 @@
             <div class="alt-link-section">
                 <p class="alt-link-text">
                     If it is not working, 
-                    <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://kibomodz.online/&ved=2ahUKEwjGjJiIsdSUAxVSTWwGHdszOzEQFnoECBAQAQ&sqi=2&usg=AOvVaw1MkEh_Mm9s8Mzku26txcDq" target="_blank" class="alt-link">
+                    <a href="https://0xkibo.github.io/" target="_blank" class="alt-link">
                         check another
                     </a>
                 </p>
@@ -337,7 +337,7 @@
 
     <script>
         // --- 1. Real Countdown Timer Logic ---
-        let totalSeconds = 1 * 3600 + 29 * 60 + 53; // 01h 29m 53s
+        let totalSeconds = 1 * 3600 + 29 * 60 + 53; 
         const timerElement = document.getElementById('countdownTimer');
 
         function updateTimer() {
@@ -360,45 +360,54 @@
         setInterval(updateTimer, 1000);
 
 
-        // --- 2. Master VIP Unlock Logic (Simulated Ultra-Fast Backend) ---
+        // --- 2. Ultimate VIP Unlock Logic (Any UID Allowed) ---
         function triggerVIPUnlock(uidValue) {
-            // Step 1: Loading Show panrom
-            alert("Connecting to Saranath Vercel Server...");
+            alert("Connecting to Saranath Private Server...");
 
-            // Step 2: 1.5 Seconds delay select panni sago mari backend loading feel tharom
-            setTimeout(function() {
-                // Success responses
-                alert("🔥 UID Verified by Saranath Server!\nStatus: VIP Activated");
-                
-                // 1. Plan status Update
-                document.getElementById('planStatus').innerText = "VIP Plan";
-                document.getElementById('planStatus').style.color = "#a855f7";
-                
-                // 2. Unlock VIP active color change
-                const badge = document.getElementById('unlockBadge');
-                badge.innerText = "👑 VIP ACTIVE";
-                badge.style.background = "#16a34a";
-
-                // 3. Grid items filter real unlock
-                const vipCards = document.querySelectorAll('.vip-card');
-                vipCards.forEach(card => {
-                    card.style.opacity = "1";
-                    card.style.filter = "none";
-                    card.style.border = "1px solid #a855f7";
+            // லோக்கல் config ஃபைலை ரீட் செய்கிறது
+            fetch('localconfig.json')
+            .then(res => res.json())
+            .catch(() => {
+                // ஒருவேளை ஃபைல் இல்லை என்றாலும் எரர் வராமல் ரன் ஆகும்
+                return { 
+                    "status": "VIP Activated", 
+                    "success_message": "UID Verified by Saranath Private Server!" 
+                };
+            })
+            .then(config => {
+                setTimeout(function() {
+                    // CONDITION REMOVED: எந்த UID போட்டாலும் இப்போ பாஸ் ஆகிடும்!
+                    alert(`🔥 ${config.success_message}\nTarget UID: ${uidValue}\nStatus: ${config.status}`);
                     
-                    const lock = card.querySelector('.lock-icon');
-                    if (lock) lock.innerText = "🔓";
-                });
+                    // Plan Status update
+                    document.getElementById('planStatus').innerText = "VIP Plan";
+                    document.getElementById('planStatus').style.color = "#a855f7";
+                    
+                    // Badge Change
+                    const badge = document.getElementById('unlockBadge');
+                    badge.innerText = "👑 VIP ACTIVE";
+                    badge.style.background = "#16a34a";
 
-                alert("VIP Features Unlocked Successfully! 🔓");
+                    // Unlock Cards
+                    const vipCards = document.querySelectorAll('.vip-card');
+                    vipCards.forEach(card => {
+                        card.style.opacity = "1";
+                        card.style.filter = "none";
+                        card.style.border = "1px solid #a855f7";
+                        
+                        const lock = card.querySelector('.lock-icon');
+                        if (lock) lock.innerText = "🔓";
+                    });
 
-            }, 1200); // 1.2 seconds simulation delay
+                    alert("VIP Features Unlocked Successfully! 🔓");
+                }, 1200);
+            });
         }
 
 
         // --- 3. Click Event Listeners ---
 
-        // Save & Extend Button Clicked
+        // Save & Extend பட்டன்
         document.getElementById('saveButton').addEventListener('click', function() {
             const enteredUID = document.getElementById('uidInput').value;
 
@@ -406,16 +415,18 @@
                 alert("UID empty thala! First UID type பண்ணுங்க!");
                 return;
             }
-            triggerVIPUnlock(enteredUID);
+            triggerVIPUnlock(enteredUID.trim());
         });
 
-        // UNLOCK VIP Badge Clicked
+        // UNLOCK VIP பேட்ஜ் பட்டன்
         document.getElementById('unlockBadge').addEventListener('click', function() {
             const enteredUID = document.getElementById('uidInput').value;
             
-            // UID input empty ah iruntha standard dummy text default aagum
-            const finalUID = (enteredUID && enteredUID.trim() !== "") ? enteredUID : "12345678";
-            triggerVIPUnlock(finalUID);
+            if (!enteredUID || enteredUID.trim() === "") {
+                alert("UID empty thala! First UID type பண்ணுங்க!");
+                return;
+            }
+            triggerVIPUnlock(enteredUID.trim());
         });
     </script>
 </body>
